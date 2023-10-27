@@ -14,7 +14,7 @@ info:
   version: 1.0.11
 externalDocs:
   description: Repo GCF
-  url: https://petapedia.github.io/gcf/
+  url: https://intern-monitoring.github.io/gcf/
 servers:
   - url: https://asia-southeast2-bursakerja-project.cloudfunctions.net
 tags:
@@ -31,13 +31,13 @@ tags:
   - name: user
     description: Get Token and Authorize
 paths:
-  /petapedia:
+  /user:
     get:
       tags:
         - data
-      summary: Get Data Geospasial
-      description: List Data Geospasial
-      operationId: getGeoJSON
+      summary: Get Data User
+      description: List Data User
+      operationId: getUserJSON
       responses:
         "200":
           description: successful operation
@@ -46,10 +46,10 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Peta"
+                  $ref: "#/components/schemas/User"
         "400":
           description: Invalid status value
-  /petapedia-post:
+  /login:
     post:
       tags:
         - auth
@@ -76,7 +76,7 @@ paths:
             - read:apiKey
 components:
   schemas:
-    Peta:
+    User:
       type: object
       properties:
         type:
