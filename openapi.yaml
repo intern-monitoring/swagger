@@ -23,7 +23,7 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://intern-monitoring.github.io/gcf/getgetAllUser/
-  - name: auth
+  - name: login
     description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
