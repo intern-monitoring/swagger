@@ -22,7 +22,7 @@ tags:
     description: Data User
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/getgetAllUser/
+      url: https://intern-monitoring.github.io/gcf/getAllUser/
   - name: login
     description: Auth to Access to API
     externalDocs:
@@ -31,7 +31,7 @@ tags:
   - name: user
     description: Get Token and Authorize
 paths:
-  /user:
+  /intermoni-user:
     get:
       tags:
         - data
@@ -49,7 +49,7 @@ paths:
                   $ref: "#/components/schemas/User"
         "400":
           description: Invalid status value
-  /login:
+  /intermoni-login:
     post:
       tags:
         - login
