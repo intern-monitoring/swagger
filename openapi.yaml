@@ -10,24 +10,24 @@ info:
     email: dimasardnt6@gmail.com
   license:
     name: Peda Package
-    url: https://pkg.go.dev/github.com/petapedia/peda
+    url: https://pkg.go.dev/github.com/intern-monitoring/backend-intermoni
   version: 1.0.11
 externalDocs:
   description: Repo GCF
   url: https://petapedia.github.io/gcf/
 servers:
-  - url: https://asia-southeast2-awangga.cloudfunctions.net
+  - url: https://asia-southeast2-bursakerja-project.cloudfunctions.net
 tags:
   - name: data
-    description: Data Geo Spasial
+    description: Data User
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://petapedia.github.io/gcf/get/
+      url: https://intern-monitoring.github.io/gcf/getgetAllUser/
   - name: auth
     description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://petapedia.github.io/gcf/post/
+      url: https://intern-monitoring.github.io/gcf/login/
   - name: user
     description: Get Token and Authorize
 paths:
