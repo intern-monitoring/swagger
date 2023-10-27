@@ -9,7 +9,7 @@ info:
   contact:
     email: dimasardnt6@gmail.com
   license:
-    name: Peda Package
+    name: Intermoni Package
     url: https://pkg.go.dev/github.com/intern-monitoring/backend-intermoni
   version: 1.0.11
 externalDocs:
