@@ -2,9 +2,7 @@ openapi: 3.0.3
 info:
   title: Dokumen API Cloud Function - OpenAPI 3.0
   description: >-
-    Jelaskan disini apa saja yang perlu dijelaskan
-    termasuk informasi yang diperlukan untuk dinilai
-    term of service isi dari link repo dari swagger ini
+    Dokumen API Cloud Function Aplikasi Internship Monitoring
   termsOfService: https://github.com/intern-monitoring/swagger
   contact:
     email: dimasardnt6@gmail.com
@@ -18,24 +16,22 @@ externalDocs:
 servers:
   - url: https://asia-southeast2-bursakerja-project.cloudfunctions.net
 tags:
-  - name: data
+  - name: User
     description: Data User
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://intern-monitoring.github.io/gcf/getAllUser/
-  - name: login
+  - name: Auth
     description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://intern-monitoring.github.io/gcf/login/
-  - name: user
-    description: Get Token and Authorize
 paths:
   /intermoni-user:
     get:
       tags:
-        - data
-      summary: Get Data User
+        - User
+      summary: Get All User
       description: List Data User
       operationId: getUserJSON
       responses:
@@ -52,7 +48,7 @@ paths:
   /intermoni-login:
     post:
       tags:
-        - login
+        - Auth
       summary: Login get Token
       description: Login and Get User Token
       operationId: authService
@@ -79,20 +75,15 @@ components:
     User:
       type: object
       properties:
-        type:
+        _id:
           type: string
-        geometry:
-          type: object
-          properties:
-            type:
-              type: string
-            coordinates:
-              type: array
-        properties:
-          type: object
-          properties:
-            name:
-              type: string
+          example: asdasdasdasd
+        email:
+          type: string
+          example: admin@gmail.com
+        role:
+          type: string
+          example: admin
     Login:
       type: object
       properties:
@@ -107,20 +98,20 @@ components:
       properties:
         status:
           type: bool
-          example: false
+          example: true
         message:
           type: string
-          example: fehguy
+          example: message
         token:
           type: string
-          example: fehguy
+          example: token
   requestBodies:
     AuthReq:
       description: Request Authentication
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Auth"
+            $ref: "#/components/schemas/Login"
     UserArray:
       description: List of user object
       content:
