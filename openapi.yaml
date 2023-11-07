@@ -20,12 +20,17 @@ tags:
     description: Data User
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/getAllUser/
+      url: https://intern-monitoring.github.io/gcf/user/
   - name: Auth
     description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://intern-monitoring.github.io/gcf/login/
+  - name: Mahasiswa
+    description: Mahasiswa to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intern-monitoring.github.io/gcf/mahasiswa/
 paths:
   /intermoni-user:
     get:
@@ -70,6 +75,52 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
+  /intermoni-mahasiswa/{mahasiswaId}:
+    get:
+      tags:
+        - Mahasiswa
+      summary: Get Mahasiswa by ID
+      description: Get a Mahasiswa by its ID
+      operationId: getMahasiswaById
+      parameters:
+        - name: mahasiswaId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mahasiswa
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mahasiswa"
+        "404":
+          description: Mahasiswa not found
+    put:
+      tags:
+        - Mahasiswa
+      summary: Update Mahasiswa
+      description: Update an existing Mahasiswa
+      operationId: updateMahasiswa
+      parameters:
+        - name: mahasiswaId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mahasiswa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mahasiswa"
+      responses:
+        "200":
+          description: Mahasiswa updated successfully
+        "404":
+          description: Mahasiswa not found
 components:
   schemas:
     User:
@@ -93,6 +144,26 @@ components:
         password:
           type: string
           example: secret
+    Mahasiswa:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        studentId:
+          type: string
+          example: 123456
+        email:
+          type: string
+          example: john@example.com
+    MahasiswaArray:
+      description: List of Mahasiswa objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Mahasiswa"
     AuthResponse:
       type: object
       properties:
