@@ -31,6 +31,11 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://intern-monitoring.github.io/gcf/mahasiswa/
+  - name: Mitra
+    description: Mitra to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intern-monitoring.github.io/gcf/mitra/
 paths:
   /intermoni-user:
     get:
@@ -98,6 +103,10 @@ paths:
                 $ref: "#/components/schemas/Mahasiswa"
         "404":
           description: Mahasiswa not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
     put:
       tags:
         - Mahasiswa
@@ -121,6 +130,64 @@ paths:
           description: Mahasiswa updated successfully
         "404":
           description: Mahasiswa not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-mitra/{mitraId}:
+    get:
+      tags:
+        - Mitra
+      summary: Get Mitra by ID
+      description: Get a Mitra by its ID
+      operationId: getMitraById
+      parameters:
+        - name: mitraId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mitra
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mitra"
+        "404":
+          description: Mitra not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Mitra
+      summary: Update Mitra
+      description: Update an existing Mitra
+      operationId: updateMitra
+      parameters:
+        - name: mitraId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mitra
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mitra"
+      responses:
+        "200":
+          description: Mitra updated successfully
+        "404":
+          description: Mitra not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
 components:
   schemas:
     User:
@@ -176,6 +243,26 @@ components:
         token:
           type: string
           example: token
+    Mitra:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Mitra Name
+        address:
+          type: string
+          example: Mitra Address
+        contact:
+          type: string
+          example: contact@example.com
+    MitraArray:
+      description: List of Mitra objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Mitra"
   requestBodies:
     AuthReq:
       description: Request Authentication
