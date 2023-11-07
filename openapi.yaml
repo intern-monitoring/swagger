@@ -188,6 +188,116 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
+  /intermoni-magang:
+    get:
+      tags:
+        - Magang
+      summary: Get All Magang
+      description: List Data Magang
+      operationId: getAllMagang
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MagangArray"
+    post:
+      tags:
+        - Magang
+      summary: Create Magang
+      description: Create a new Magang
+      operationId: createMagang
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Magang"
+      responses:
+        "201":
+          description: Magang created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /magang/{magangId}:
+    get:
+      tags:
+        - Magang
+      summary: Get Magang by ID
+      description: Get a Magang by its ID
+      operationId: getMagangById
+      parameters:
+        - name: magangId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Magang
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Magang"
+        "404":
+          description: Magang not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Magang
+      summary: Update Magang
+      description: Update an existing Magang
+      operationId: updateMagang
+      parameters:
+        - name: magangId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Magang
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Magang"
+      responses:
+        "200":
+          description: Magang updated successfully
+        "404":
+          description: Magang not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    delete:
+      tags:
+        - Magang
+      summary: Delete Magang
+      description: Delete a Magang by its ID
+      operationId: deleteMagang
+      parameters:
+        - name: magangId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Magang
+      responses:
+        "204":
+          description: Magang deleted successfully
+        "404":
+          description: Magang not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
 components:
   schemas:
     User:
@@ -263,6 +373,26 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Mitra"
+    Magang:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Magang Name
+        duration:
+          type: string
+          example: 3 months
+        location:
+          type: string
+          example: Magang Location
+    MagangArray:
+      description: List of Magang objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Magang"
   requestBodies:
     AuthReq:
       description: Request Authentication
