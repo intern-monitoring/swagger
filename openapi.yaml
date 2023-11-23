@@ -41,6 +41,11 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://intern-monitoring.github.io/gcf/pembimbing/
+  - name: Mentor
+    description: Mentor to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intern-monitoring.github.io/gcf/mentor/
 paths:
   /intermoni-user:
     get:
@@ -371,6 +376,91 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
+  /mentor:
+    get:
+      tags:
+        - Mentor
+      summary: Get All Mentors
+      description: List Data Mentors
+      operationId: getAllMentors
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentorArray"
+    post:
+      tags:
+        - Mentor
+      summary: Create Mentor
+      description: Create a new Mentor
+      operationId: createMentor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mentor"
+      responses:
+        "201":
+          description: Mentor created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /mentor/{mentorId}:
+    get:
+      tags:
+        - Mentor
+      summary: Get Mentor by ID
+      description: Get a Mentor by its ID
+      operationId: getMentorById
+      parameters:
+        - name: mentorId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mentor
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mentor"
+        "404":
+          description: Mentor not found
+
+    put:
+      tags:
+        - Mentor
+      summary: Update Mentor
+      description: Update an existing Mentor
+      operationId: updateMentor
+      parameters:
+        - name: mentorId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mentor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mentor"
+      responses:
+        "200":
+          description: Mentor updated successfully
+        "404":
+          description: Mentor not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
 components:
   schemas:
     User:
@@ -483,6 +573,23 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Pembimbing"
+    Mentor:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Mentor Name
+        email:
+          type: string
+          example: mentor@example.com
+    MentorArray:
+      description: List of Mentor objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Mentor"
   requestBodies:
     AuthReq:
       description: Request Authentication
