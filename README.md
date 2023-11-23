@@ -1,3 +1,3 @@
 # swagger intermoni
 
-link : intern-monitoring.github.io/swagger
+link : https://intern-monitoring.github.io/swagger
