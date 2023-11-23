@@ -280,28 +280,6 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-    delete:
-      tags:
-        - Magang
-      summary: Delete Magang
-      description: Delete a Magang by its ID
-      operationId: deleteMagang
-      parameters:
-        - name: magangId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Magang
-      responses:
-        "204":
-          description: Magang deleted successfully
-        "404":
-          description: Magang not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
 components:
   schemas:
     User:
