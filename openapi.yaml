@@ -36,6 +36,11 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://intern-monitoring.github.io/gcf/mitra/
+  - name: Pembimbing
+    description: Pembimbing to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intern-monitoring.github.io/gcf/pembimbing/
 paths:
   /intermoni-user:
     get:
@@ -280,6 +285,92 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
+  /pembimbing:
+    get:
+      tags:
+        - Pembimbing
+      summary: Get All Pembimbing
+      description: List Data Pembimbing
+      operationId: getAllPembimbing
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PembimbingArray"
+    post:
+      tags:
+        - Pembimbing
+      summary: Create Pembimbing
+      description: Create a new Pembimbing
+      operationId: createPembimbing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pembimbing"
+      responses:
+        "201":
+          description: Pembimbing created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+
+  /pembimbing/{pembimbingId}:
+    get:
+      tags:
+        - Pembimbing
+      summary: Get Pembimbing by ID
+      description: Get a Pembimbing by its ID
+      operationId: getPembimbingById
+      parameters:
+        - name: pembimbingId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Pembimbing
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pembimbing"
+        "404":
+          description: Pembimbing not found
+
+    put:
+      tags:
+        - Pembimbing
+      summary: Update Pembimbing
+      description: Update an existing Pembimbing
+      operationId: updatePembimbing
+      parameters:
+        - name: pembimbingId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Pembimbing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pembimbing"
+      responses:
+        "200":
+          description: Pembimbing updated successfully
+        "404":
+          description: Pembimbing not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
 components:
   schemas:
     User:
@@ -375,6 +466,23 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Magang"
+    Pembimbing:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Pembimbing Name
+        email:
+          type: string
+          example: pembimbing@example.com
+    PembimbingArray:
+      description: List of Pembimbing objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Pembimbing"
   requestBodies:
     AuthReq:
       description: Request Authentication
