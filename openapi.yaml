@@ -25,27 +25,42 @@ tags:
     description: Data User
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/user/
+      url: https://intern-monitoring.github.io/gcf/tree/main/user
   - name: Mahasiswa
     description: Mahasiswa to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/mahasiswa/
+      url: https://intern-monitoring.github.io/gcf/tree/main/mahasiswa
   - name: Mitra
     description: Mitra to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/mitra/
+      url: https://intern-monitoring.github.io/gcf/tree/main/mitra
   - name: Pembimbing
     description: Pembimbing to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/pembimbing/
+      url: https://intern-monitoring.github.io/gcf/tree/main/pembimbing
   - name: Mentor
     description: Mentor to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/mentor/
+      url: https://intern-monitoring.github.io/gcf/tree/main/mentor
+  - name: Magang
+    description: Magang to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intern-monitoring.github.io/gcf/tree/main/magang
+  - name: Mahasiswa Magang
+    description: Mahasiswa Magang to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intern-monitoring.github.io/gcf/tree/main/mahasiswamagang
+  - name: Report
+    description: Report to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intern-monitoring.github.io/gcf/tree/main/report
 paths:
   /intermoni-login:
     post:
@@ -478,7 +493,7 @@ paths:
   /intermoni-mahasiswa-magang:
     get:
       tags:
-        - MahasiswaMagang
+        - Mahasiswa Magang
       summary: Get All Mahasiswa Magang
       description: List Data Mahasiswa Magang
       operationId: getAllMahasiswaMagang
@@ -495,7 +510,7 @@ paths:
             - read:apiKey
     post:
       tags:
-        - MahasiswaMagang
+        - Mahasiswa Magang
       summary: Create Mahasiswa Magang
       description: Create a new Mahasiswa Magang
       operationId: createMahasiswaMagang
@@ -516,7 +531,7 @@ paths:
   /intermoni-mahasiswa-magang/{mahasiswaMagangId}:
     get:
       tags:
-        - MahasiswaMagang
+        - Mahasiswa Magang
       summary: Get Mahasiswa Magang by ID
       description: Get a Mahasiswa Magang by its ID
       operationId: getMahasiswaMagangById
@@ -542,7 +557,7 @@ paths:
             - read:apiKey
     put:
       tags:
-        - MahasiswaMagang
+        - Mahasiswa Magang
       summary: Update Mahasiswa Magang
       description: Update an existing Mahasiswa Magang
       operationId: updateMahasiswaMagang
@@ -569,7 +584,7 @@ paths:
             - read:apiKey
     delete:
       tags:
-        - MahasiswaMagang
+        - Mahasiswa Magang
       summary: Delete Mahasiswa Magang
       description: Delete a Mahasiswa Magang by its ID
       operationId: deleteMahasiswaMagang
@@ -585,6 +600,120 @@ paths:
           description: Mahasiswa Magang deleted successfully
         "404":
           description: Mahasiswa Magang not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-report:
+    get:
+      tags:
+        - Report
+      summary: Get All Reports
+      description: List Data Reports
+      operationId: getAllReports
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReportArray"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    post:
+      tags:
+        - Report
+      summary: Create Report
+      description: Create a new Report
+      operationId: createReport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Report"
+      responses:
+        "201":
+          description: Report created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-report/{reportId}:
+    get:
+      tags:
+        - Report
+      summary: Get Report by ID
+      description: Get a Report by its ID
+      operationId: getReportById
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Report
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Report"
+        "404":
+          description: Report not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Report
+      summary: Update Report
+      description: Update an existing Report
+      operationId: updateReport
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Report
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Report"
+      responses:
+        "200":
+          description: Report updated successfully
+        "404":
+          description: Report not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    delete:
+      tags:
+        - Report
+      summary: Delete Report
+      description: Delete a Report by its ID
+      operationId: deleteReport
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Report
+      responses:
+        "204":
+          description: Report deleted successfully
+        "404":
+          description: Report not found
       security:
         - token:
             - write:apiKey
