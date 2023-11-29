@@ -16,16 +16,16 @@ externalDocs:
 servers:
   - url: https://asia-southeast2-bursakerja-project.cloudfunctions.net
 tags:
+  - name: Auth
+    description: Auth to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/intern-monitoring/gcf/tree/main/login
   - name: User
     description: Data User
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://intern-monitoring.github.io/gcf/user/
-  - name: Auth
-    description: Auth to Access to API
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/login/
   - name: Mahasiswa
     description: Mahasiswa to Access to API
     externalDocs:
@@ -47,24 +47,6 @@ tags:
       description: Deskripsi dan Kode Program
       url: https://intern-monitoring.github.io/gcf/mentor/
 paths:
-  /intermoni-user:
-    get:
-      tags:
-        - User
-      summary: Get All User
-      description: List Data User
-      operationId: getUserJSON
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
-        "400":
-          description: Invalid status value
   /intermoni-login:
     post:
       tags:
@@ -86,6 +68,24 @@ paths:
                 $ref: "#/components/schemas/AuthResponse"
         "405":
           description: Invalid input
+  /intermoni-user:
+    get:
+      tags:
+        - User
+      summary: Get All User
+      description: List Data User
+      operationId: getUserJSON
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid status value
       security:
         - token:
             - write:apiKey
@@ -198,6 +198,191 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
+  /pembimbing:
+    get:
+      tags:
+        - Pembimbing
+      summary: Get All Pembimbing
+      description: List Data Pembimbing
+      operationId: getAllPembimbing
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PembimbingArray"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    post:
+      tags:
+        - Pembimbing
+      summary: Create Pembimbing
+      description: Create a new Pembimbing
+      operationId: createPembimbing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pembimbing"
+      responses:
+        "201":
+          description: Pembimbing created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+
+  /pembimbing/{pembimbingId}:
+    get:
+      tags:
+        - Pembimbing
+      summary: Get Pembimbing by ID
+      description: Get a Pembimbing by its ID
+      operationId: getPembimbingById
+      parameters:
+        - name: pembimbingId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Pembimbing
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pembimbing"
+        "404":
+          description: Pembimbing not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Pembimbing
+      summary: Update Pembimbing
+      description: Update an existing Pembimbing
+      operationId: updatePembimbing
+      parameters:
+        - name: pembimbingId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Pembimbing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pembimbing"
+      responses:
+        "200":
+          description: Pembimbing updated successfully
+        "404":
+          description: Pembimbing not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /mentor:
+    get:
+      tags:
+        - Mentor
+      summary: Get All Mentors
+      description: List Data Mentors
+      operationId: getAllMentors
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MentorArray"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    post:
+      tags:
+        - Mentor
+      summary: Create Mentor
+      description: Create a new Mentor
+      operationId: createMentor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mentor"
+      responses:
+        "201":
+          description: Mentor created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /mentor/{mentorId}:
+    get:
+      tags:
+        - Mentor
+      summary: Get Mentor by ID
+      description: Get a Mentor by its ID
+      operationId: getMentorById
+      parameters:
+        - name: mentorId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mentor
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mentor"
+        "404":
+          description: Mentor not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Mentor
+      summary: Update Mentor
+      description: Update an existing Mentor
+      operationId: updateMentor
+      parameters:
+        - name: mentorId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mentor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mentor"
+      responses:
+        "200":
+          description: Mentor updated successfully
+        "404":
+          description: Mentor not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
   /intermoni-magang:
     get:
       tags:
@@ -290,179 +475,131 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /pembimbing:
+  /mahasiswa-magang:
     get:
       tags:
-        - Pembimbing
-      summary: Get All Pembimbing
-      description: List Data Pembimbing
-      operationId: getAllPembimbing
+        - MahasiswaMagang
+      summary: Get All Mahasiswa Magang
+      description: List Data Mahasiswa Magang
+      operationId: getAllMahasiswaMagang
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PembimbingArray"
+                $ref: "#/components/schemas/MahasiswaMagangArray"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
     post:
       tags:
-        - Pembimbing
-      summary: Create Pembimbing
-      description: Create a new Pembimbing
-      operationId: createPembimbing
+        - MahasiswaMagang
+      summary: Create Mahasiswa Magang
+      description: Create a new Mahasiswa Magang
+      operationId: createMahasiswaMagang
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Pembimbing"
+              $ref: "#/components/schemas/MahasiswaMagang"
       responses:
         "201":
-          description: Pembimbing created successfully
+          description: Mahasiswa Magang created successfully
         "400":
           description: Invalid input
       security:
         - token:
             - write:apiKey
             - read:apiKey
-
-  /pembimbing/{pembimbingId}:
+  /mahasiswa-magang/{mahasiswaMagangId}:
     get:
       tags:
-        - Pembimbing
-      summary: Get Pembimbing by ID
-      description: Get a Pembimbing by its ID
-      operationId: getPembimbingById
+        - MahasiswaMagang
+      summary: Get Mahasiswa Magang by ID
+      description: Get a Mahasiswa Magang by its ID
+      operationId: getMahasiswaMagangById
       parameters:
-        - name: pembimbingId
+        - name: mahasiswaMagangId
           in: path
           required: true
           schema:
             type: string
-          description: ID of the Pembimbing
+          description: ID of the Mahasiswa Magang
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Pembimbing"
+                $ref: "#/components/schemas/MahasiswaMagang"
         "404":
-          description: Pembimbing not found
-
-    put:
-      tags:
-        - Pembimbing
-      summary: Update Pembimbing
-      description: Update an existing Pembimbing
-      operationId: updatePembimbing
-      parameters:
-        - name: pembimbingId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Pembimbing
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Pembimbing"
-      responses:
-        "200":
-          description: Pembimbing updated successfully
-        "404":
-          description: Pembimbing not found
+          description: Mahasiswa Magang not found
       security:
         - token:
             - write:apiKey
             - read:apiKey
-  /mentor:
-    get:
+    put:
       tags:
-        - Mentor
-      summary: Get All Mentors
-      description: List Data Mentors
-      operationId: getAllMentors
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MentorArray"
-    post:
-      tags:
-        - Mentor
-      summary: Create Mentor
-      description: Create a new Mentor
-      operationId: createMentor
+        - MahasiswaMagang
+      summary: Update Mahasiswa Magang
+      description: Update an existing Mahasiswa Magang
+      operationId: updateMahasiswaMagang
+      parameters:
+        - name: mahasiswaMagangId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Mahasiswa Magang
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Mentor"
+              $ref: "#/components/schemas/MahasiswaMagang"
       responses:
-        "201":
-          description: Mentor created successfully
-        "400":
-          description: Invalid input
+        "200":
+          description: Mahasiswa Magang updated successfully
+        "404":
+          description: Mahasiswa Magang not found
       security:
         - token:
             - write:apiKey
             - read:apiKey
-  /mentor/{mentorId}:
-    get:
+    delete:
       tags:
-        - Mentor
-      summary: Get Mentor by ID
-      description: Get a Mentor by its ID
-      operationId: getMentorById
+        - MahasiswaMagang
+      summary: Delete Mahasiswa Magang
+      description: Delete a Mahasiswa Magang by its ID
+      operationId: deleteMahasiswaMagang
       parameters:
-        - name: mentorId
+        - name: mahasiswaMagangId
           in: path
           required: true
           schema:
             type: string
-          description: ID of the Mentor
+          description: ID of the Mahasiswa Magang
       responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Mentor"
+        "204":
+          description: Mahasiswa Magang deleted successfully
         "404":
-          description: Mentor not found
-
-    put:
-      tags:
-        - Mentor
-      summary: Update Mentor
-      description: Update an existing Mentor
-      operationId: updateMentor
-      parameters:
-        - name: mentorId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: ID of the Mentor
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Mentor"
-      responses:
-        "200":
-          description: Mentor updated successfully
-        "404":
-          description: Mentor not found
+          description: Mahasiswa Magang not found
       security:
         - token:
             - write:apiKey
             - read:apiKey
 components:
   schemas:
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          example: yourmail@gmail.com
+        password:
+          type: string
+          example: secret
     User:
       type: object
       properties:
@@ -475,15 +612,6 @@ components:
         role:
           type: string
           example: admin
-    Login:
-      type: object
-      properties:
-        email:
-          type: string
-          example: yourmail@gmail.com
-        password:
-          type: string
-          example: secret
     Mahasiswa:
       type: object
       properties:
@@ -536,26 +664,6 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Mitra"
-    Magang:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 1
-        name:
-          type: string
-          example: Magang Name
-        duration:
-          type: string
-          example: 3 months
-        location:
-          type: string
-          example: Magang Location
-    MagangArray:
-      description: List of Magang objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Magang"
     Pembimbing:
       type: object
       properties:
@@ -590,6 +698,43 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Mentor"
+    Magang:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Magang Name
+        duration:
+          type: string
+          example: 3 months
+        location:
+          type: string
+          example: Magang Location
+    MagangArray:
+      description: List of Magang objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Magang"
+    MahasiswaMagang:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        mahasiswaId:
+          type: string
+          example: 123456
+        magangId:
+          type: string
+          example: 789012
+    MahasiswaMagangArray:
+      description: List of Mahasiswa Magang objects
+      type: array
+      items:
+        $ref: "#/components/schemas/MahasiswaMagang"
   requestBodies:
     AuthReq:
       description: Request Authentication
