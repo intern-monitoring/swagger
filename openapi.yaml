@@ -56,6 +56,11 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://intermoni.my.id/gcf/mahasiswamagang/
+  - name: Seleksi
+    description: Seleksi to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intermoni.my.id/gcf/seleksi/
   - name: Report
     description: Report to Access to API
     externalDocs:
@@ -490,6 +495,34 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
+  /intermoni-seleksi/{seleksiId}:
+    put:
+      tags:
+        - Seleksi
+      summary: Update Seleksi
+      description: Update an existing Seleksi
+      operationId: updateSeleksi
+      parameters:
+        - name: seleksiId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Seleksi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Seleksi"
+      responses:
+        "200":
+          description: Seleksi updated successfully
+        "404":
+          description: Seleksi not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
   /intermoni-mahasiswa-magang:
     get:
       tags:
@@ -864,6 +897,43 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/MahasiswaMagang"
+    Seleksi:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        magangId:
+          type: string
+          example: 789012
+        criteria:
+          type: string
+          example: "Interview performance"
+        result:
+          type: string
+          example: "Passed"
+    SeleksiArray:
+      description: List of Seleksi objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Seleksi"
+    Report:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        magangId:
+          type: string
+          example: 789012
+        content:
+          type: string
+          example: "This is the report content."
+    ReportArray:
+      description: List of Report objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Report"
   requestBodies:
     AuthReq:
       description: Request Authentication
