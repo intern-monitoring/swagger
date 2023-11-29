@@ -198,7 +198,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /pembimbing:
+  /intermoni-pembimbing:
     get:
       tags:
         - Pembimbing
@@ -237,7 +237,7 @@ paths:
             - write:apiKey
             - read:apiKey
 
-  /pembimbing/{pembimbingId}:
+  /intermoni-pembimbing/{pembimbingId}:
     get:
       tags:
         - Pembimbing
@@ -291,7 +291,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /mentor:
+  /intermoni-mentor:
     get:
       tags:
         - Mentor
@@ -329,7 +329,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /mentor/{mentorId}:
+  /intermoni-mentor/{mentorId}:
     get:
       tags:
         - Mentor
@@ -421,7 +421,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /magang/{magangId}:
+  /intermoni-magang/{magangId}:
     get:
       tags:
         - Magang
@@ -475,7 +475,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /mahasiswa-magang:
+  /intermoni-mahasiswa-magang:
     get:
       tags:
         - MahasiswaMagang
@@ -513,7 +513,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /mahasiswa-magang/{mahasiswaMagangId}:
+  /intermoni-mahasiswa-magang/{mahasiswaMagangId}:
     get:
       tags:
         - MahasiswaMagang
