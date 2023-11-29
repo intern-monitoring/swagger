@@ -20,47 +20,47 @@ tags:
     description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://github.com/intern-monitoring/gcf/tree/main/login
+      url: https://intermoni.my.id/gcf/login/
   - name: User
     description: Data User
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/tree/main/user
+      url: https://intermoni.my.id/gcf/user/
   - name: Mahasiswa
     description: Mahasiswa to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/tree/main/mahasiswa
+      url: https://intermoni.my.id/gcf/mahasiswa/
   - name: Mitra
     description: Mitra to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/tree/main/mitra
+      url: https://intermoni.my.id/gcf/mitra/
   - name: Pembimbing
     description: Pembimbing to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/tree/main/pembimbing
+      url: https://intermoni.my.id/gcf/pembimbing/
   - name: Mentor
     description: Mentor to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/tree/main/mentor
+      url: https://intermoni.my.id/gcf/mentor/
   - name: Magang
     description: Magang to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/tree/main/magang
+      url: https://intermoni.my.id/gcf/magang/
   - name: Mahasiswa Magang
     description: Mahasiswa Magang to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/tree/main/mahasiswamagang
+      url: https://intermoni.my.id/gcf/mahasiswamagang/
   - name: Report
     description: Report to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intern-monitoring.github.io/gcf/tree/main/report
+      url: https://intermoni.my.id/gcf/report/
 paths:
   /intermoni-login:
     post:
