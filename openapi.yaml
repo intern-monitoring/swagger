@@ -32,7 +32,7 @@ tags:
       description: Deskripsi dan Kode Program
       url: https://intermoni.my.id/gcf/signup_mitra/
   - name: User
-    description: Data User
+    description: Get Data User oleh Admin
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://intermoni.my.id/gcf/user/
@@ -91,7 +91,7 @@ paths:
     post:
       tags:
         - Auth
-      summary: Login get Token
+      summary: Login get Token and Role
       description: Login and Get User Token
       operationId: authService
       requestBody:
@@ -114,7 +114,7 @@ paths:
         - User
       summary: Get All User
       description: List Data User
-      operationId: getUserJSON
+      operationId: getAllUserJSON
       responses:
         "200":
           description: successful operation
@@ -124,6 +124,33 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid status value
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-user?id={userId}:
+    get:
+      tags:
+        - User
+      summary: Get User By ID
+      description: List Data User
+      operationId: getUserJSON
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the User
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
         "400":
           description: Invalid status value
       security:
@@ -857,6 +884,21 @@ components:
         password:
           type: string
           example: secret
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: message
+        token:
+          type: string
+          example: token
+        role:
+          type: string
+          example: admin
     User:
       type: object
       properties:
@@ -987,18 +1029,6 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Mahasiswa"
-    AuthResponse:
-      type: object
-      properties:
-        status:
-          type: bool
-          example: true
-        message:
-          type: string
-          example: message
-        token:
-          type: string
-          example: token
     Mitra:
       type: object
       properties:
