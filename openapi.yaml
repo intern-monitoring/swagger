@@ -872,47 +872,101 @@ components:
     SignupMahasiswaRequest:
       type: object
       properties:
-        email:
-          type: string
-          example: yourmail@gmail.com
-        password:
-          type: string
-          example: yourpassword
-        name:
+        namalengkap:
           type: string
           example: John Doe
-        studentId:
+        tanggallahir:
           type: string
-          example: 123456
+          example: "1990-01-01"
+        jeniskelamin:
+          type: string
+          example: Male
+        nim:
+          type: string
+          example: 123456789
+        perguruantinggi:
+          type: string
+          example: Universitas ABC
+        prodi:
+          type: string
+          example: Teknik Informatika
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: mahasiswa@example.com
+            password:
+              type: string
+              example: yourpassword
+            confirmpass:
+              type: string
+              example: yourpassword
+          required:
+            - email
+            - password
+            - confirmpass
       required:
-        - email
-        - password
-        - name
-        - studentId
+        - namalengkap
+        - tanggallahir
+        - jeniskelamin
+        - nim
+        - perguruantinggi
+        - prodi
+        - akun
     SignupMitraRequest:
       type: object
       properties:
-        email:
+        namanarahubung:
           type: string
-          example: mitra@example.com
-        password:
+          example: John Doe
+        nohpnarahubung:
           type: string
-          example: yourpassword
-        name:
+          example: "123456789"
+        nama:
           type: string
-          example: Mitra Name
-        address:
+          example: Mitra ABC
+        kategori:
           type: string
-          example: Mitra Address
-        contact:
+          example: Perusahaan
+        sektorindustri:
           type: string
-          example: contact@example.com
+          example: Teknologi
+        tentang:
+          type: string
+          example: Deskripsi mengenai Mitra ABC
+        alamat:
+          type: string
+          example: Jalan Mitra ABC No. 123
+        website:
+          type: string
+          example: https://www.mitraabc.com
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: mitra@example.com
+            password:
+              type: string
+              example: yourpassword
+            confirmpass:
+              type: string
+              example: yourpassword
+          required:
+            - email
+            - password
+            - confirmpass
       required:
-        - email
-        - password
-        - name
-        - address
-        - contact
+        - namanarahubung
+        - nohpnarahubung
+        - nama
+        - kategori
+        - sektorindustri
+        - tentang
+        - alamat
+        - website
+        - akun
     Mahasiswa:
       type: object
       properties:
