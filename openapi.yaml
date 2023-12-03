@@ -114,7 +114,7 @@ paths:
         - User
       summary: Get All User
       description: List Data User
-      operationId: getAllUserJSON
+      operationId: getAllUser
       responses:
         "200":
           description: successful operation
@@ -130,17 +130,16 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-user?id={userId}:
+  /intermoni-user:
     get:
       tags:
         - User
       summary: Get User By ID
       description: List Data User
-      operationId: getUserJSON
+      operationId: getUserByID
       parameters:
         - name: userId
           in: path
-          required: true
           schema:
             type: string
           description: ID of the User
@@ -150,7 +149,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/UserData"
         "400":
           description: Invalid status value
       security:
@@ -191,17 +190,38 @@ paths:
           description: Mitra signed up successfully
         "400":
           description: Invalid input or Mitra already exists
-  /intermoni-mahasiswa?id={mahasiswaId}:
+  /intermoni-mahasiswa:
     get:
       tags:
         - Mahasiswa
-      summary: Get Mahasiswa by ID
+      summary: Get All Mahasiswa oleh Admin
+      description: List Data Mahasiswa
+      operationId: getAllMahasiswa
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Mahasiswa"
+        "404":
+          description: Mahasiswa not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /intermoni-mahasiswa:
+    get:
+      tags:
+        - Mahasiswa
+      summary: Get Mahasiswa by ID oleh Admin
       description: Get a Mahasiswa by its ID
       operationId: getMahasiswaById
       parameters:
         - name: mahasiswaId
           in: path
-          required: true
           schema:
             type: string
           description: ID of the Mahasiswa
@@ -221,7 +241,7 @@ paths:
     put:
       tags:
         - Mahasiswa
-      summary: Update Mahasiswa
+      summary: Update Mahasiswa oleh Admin & Mahasiswa
       description: Update an existing Mahasiswa
       operationId: updateMahasiswa
       parameters:
@@ -236,6 +256,11 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Mahasiswa"
+            examples:
+              mahasiswa:
+                $ref: "#/components/examples/UpdateProfilMahasiswa"
+              admin:
+                $ref: "#/components/examples/SeleksiMahasiswa"
       responses:
         "200":
           description: Mahasiswa updated successfully
@@ -245,7 +270,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-mitra?id={mitraId}:
+  /intermoni-mitra:
     get:
       tags:
         - Mitra
@@ -290,6 +315,11 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Mitra"
+            examples:
+              mitra:
+                $ref: "#/components/examples/UpdateProfilMitra"
+              admin:
+                $ref: "#/components/examples/SeleksiMitra"
       responses:
         "200":
           description: Mitra updated successfully
@@ -337,7 +367,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-pembimbing?id={pembimbingId}:
+  /intermoni-pembimbing:
     get:
       tags:
         - Pembimbing
@@ -429,7 +459,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-mentor?id={mentorId}:
+  /intermoni-mentor:
     get:
       tags:
         - Mentor
@@ -521,7 +551,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-magang?id={magangId}:
+  /intermoni-magang:
     get:
       tags:
         - Magang
@@ -613,7 +643,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-mahasiswa-magang?id={mahasiswaMagangId}:
+  /intermoni-mahasiswa-magang:
     get:
       tags:
         - Mahasiswa Magang
@@ -689,7 +719,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-seleksi?id={seleksiId}:
+  /intermoni-seleksi:
     put:
       tags:
         - Seleksi
@@ -755,7 +785,7 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
-  /intermoni-report?id={reportId}:
+  /intermoni-report:
     get:
       tags:
         - Report
@@ -911,6 +941,24 @@ components:
         role:
           type: string
           example: admin
+    UserData:
+      type: object
+      properties:
+        data:
+          type: object
+        akun:
+          type: object
+          properties:
+            _id:
+              type: string
+              example: asdasdasdasd
+            email:
+              type: string
+              example: admin@gmail.com
+            role:
+              type: string
+              example: admin
+
     SignupMahasiswaRequest:
       type: object
       properties:
@@ -1024,11 +1072,6 @@ components:
         email:
           type: string
           example: john@example.com
-    MahasiswaArray:
-      description: List of Mahasiswa objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Mahasiswa"
     Mitra:
       type: object
       properties:
@@ -1201,3 +1244,32 @@ components:
       type: apiKey
       name: Authorization
       in: header
+  examples:
+    UpdateProfilMahasiswa:
+      summary: Update Profil oleh Mahasiswa
+      value:
+        namalengkap: John Doe
+        tanggallahir: 2002-08-12
+        jeniskelamin: Laki-laki
+        nim: 123456789
+        perguruantinggi: Universitas ABC
+        prodi: Teknik Informatika
+    SeleksiMahasiswa:
+      summary: Seleksi Mahasiswa oleh Admin
+      value:
+        seleksikampus: 1
+    UpdateProfilMitra:
+      summary: Update Profil oleh Mitra
+      value:
+        namanarahubung: John Doe
+        nohpnarahubung: 08123456789
+        nama: Mitra ABC
+        kategori: Perusahaan
+        sektorindustri: Teknologi
+        tentang: Deskripsi mengenai Mitra ABC
+        alamat: Jalan Mitra ABC No. 123
+        website: https://www.mitraabc.com
+    SeleksiMitra:
+      summary: Confirm Mou oleh Admin
+      value:
+        mou: 1
