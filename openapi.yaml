@@ -947,11 +947,6 @@ components:
         contact:
           type: string
           example: contact@example.com
-    MitraArray:
-      description: List of Mitra objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Mitra"
     Pembimbing:
       type: object
       properties:
@@ -964,11 +959,6 @@ components:
         email:
           type: string
           example: pembimbing@example.com
-    PembimbingArray:
-      description: List of Pembimbing objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Pembimbing"
     Mentor:
       type: object
       properties:
@@ -981,11 +971,6 @@ components:
         email:
           type: string
           example: mentor@example.com
-    MentorArray:
-      description: List of Mentor objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Mentor"
     Magang:
       type: object
       properties:
@@ -1001,11 +986,6 @@ components:
         location:
           type: string
           example: Magang Location
-    MagangArray:
-      description: List of Magang objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Magang"
     MahasiswaMagang:
       type: object
       properties:
@@ -1018,11 +998,6 @@ components:
         magangId:
           type: string
           example: 789012
-    MahasiswaMagangArray:
-      description: List of Mahasiswa Magang objects
-      type: array
-      items:
-        $ref: "#/components/schemas/MahasiswaMagang"
     Seleksi:
       type: object
       properties:
@@ -1038,11 +1013,6 @@ components:
         result:
           type: string
           example: "Passed"
-    SeleksiArray:
-      description: List of Seleksi objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Seleksi"
     Report:
       type: object
       properties:
@@ -1055,11 +1025,6 @@ components:
         content:
           type: string
           example: "This is the report content."
-    ReportArray:
-      description: List of Report objects
-      type: array
-      items:
-        $ref: "#/components/schemas/Report"
     ChangeEmailRequest:
       type: object
       properties:
