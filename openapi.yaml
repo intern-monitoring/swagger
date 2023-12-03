@@ -117,7 +117,7 @@ paths:
       operationId: getUserByID
       parameters:
         - name: userId
-          in: path
+          in: query
           schema:
             type: string
           description: ID of the User
@@ -177,7 +177,7 @@ paths:
       operationId: getMahasiswaById
       parameters:
         - name: mahasiswaId
-          in: path
+          in: query
           schema:
             type: string
           description: ID of the Mahasiswa
@@ -202,7 +202,7 @@ paths:
       operationId: updateMahasiswa
       parameters:
         - name: mahasiswaId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -235,7 +235,7 @@ paths:
       operationId: getMitraById
       parameters:
         - name: mitraId
-          in: path
+          in: query
           schema:
             type: string
           description: ID of the Mitra
@@ -260,7 +260,7 @@ paths:
       operationId: updateMitra
       parameters:
         - name: mitraId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -313,7 +313,7 @@ paths:
       operationId: getPembimbingById
       parameters:
         - name: pembimbingId
-          in: path
+          in: query
           schema:
             type: string
           description: ID of the Pembimbing
@@ -338,7 +338,7 @@ paths:
       operationId: updatePembimbing
       parameters:
         - name: pembimbingId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -386,7 +386,7 @@ paths:
       operationId: getMentorById
       parameters:
         - name: mentorId
-          in: path
+          in: query
           schema:
             type: string
           description: ID of the Mentor
@@ -411,7 +411,7 @@ paths:
       operationId: updateMentor
       parameters:
         - name: mentorId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -459,7 +459,7 @@ paths:
       operationId: getMagangById
       parameters:
         - name: magangId
-          in: path
+          in: query
           schema:
             type: string
           description: ID of the Magang
@@ -484,7 +484,7 @@ paths:
       operationId: updateMagang
       parameters:
         - name: magangId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -532,7 +532,7 @@ paths:
       operationId: getMahasiswaMagangById
       parameters:
         - name: mahasiswaMagangId
-          in: path
+          in: query
           schema:
             type: string
           description: ID of the Mahasiswa Magang
@@ -557,7 +557,7 @@ paths:
       operationId: updateMahasiswaMagang
       parameters:
         - name: mahasiswaMagangId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -584,7 +584,7 @@ paths:
       operationId: deleteMahasiswaMagang
       parameters:
         - name: mahasiswaMagangId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -607,7 +607,7 @@ paths:
       operationId: updateSeleksi
       parameters:
         - name: seleksiId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -655,7 +655,7 @@ paths:
       operationId: getReportById
       parameters:
         - name: reportId
-          in: path
+          in: query
           schema:
             type: string
           description: ID of the Report
@@ -680,7 +680,7 @@ paths:
       operationId: updateReport
       parameters:
         - name: reportId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -707,7 +707,7 @@ paths:
       operationId: deleteReport
       parameters:
         - name: reportId
-          in: path
+          in: query
           required: true
           schema:
             type: string
