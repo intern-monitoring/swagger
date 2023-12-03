@@ -108,32 +108,6 @@ paths:
                 $ref: "#/components/schemas/AuthResponse"
         "405":
           description: Invalid input
-  /intermoni-user:
-    get:
-      tags:
-        - User
-      summary: Get User By ID
-      description: List Data User
-      operationId: getUserByID
-      parameters:
-        - name: userId
-          in: query
-          schema:
-            type: string
-          description: ID of the User
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserData"
-        "400":
-          description: Invalid status value
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
   /intermoni-signup-mahasiswa:
     post:
       tags:
@@ -168,6 +142,32 @@ paths:
           description: Mitra signed up successfully
         "400":
           description: Invalid input or Mitra already exists
+  /intermoni-user:
+    get:
+      tags:
+        - User
+      summary: Get User By ID
+      description: List Data User
+      operationId: getUserByID
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+          description: ID of the User
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserData"
+        "400":
+          description: Invalid status value
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
   /intermoni-mahasiswa:
     get:
       tags:
@@ -176,7 +176,7 @@ paths:
       description: Get a Mahasiswa by its ID
       operationId: getMahasiswaById
       parameters:
-        - name: mahasiswaId
+        - name: id
           in: query
           schema:
             type: string
@@ -201,7 +201,7 @@ paths:
       description: Update an existing Mahasiswa
       operationId: updateMahasiswa
       parameters:
-        - name: mahasiswaId
+        - name: id
           in: query
           required: true
           schema:
@@ -234,7 +234,7 @@ paths:
       description: Get a Mitra by its ID
       operationId: getMitraById
       parameters:
-        - name: mitraId
+        - name: id
           in: query
           schema:
             type: string
@@ -259,7 +259,7 @@ paths:
       description: Update an existing Mitra
       operationId: updateMitra
       parameters:
-        - name: mitraId
+        - name: id
           in: query
           required: true
           schema:
@@ -312,7 +312,7 @@ paths:
       description: Get a Pembimbing by its ID
       operationId: getPembimbingById
       parameters:
-        - name: pembimbingId
+        - name: id
           in: query
           schema:
             type: string
@@ -337,7 +337,7 @@ paths:
       description: Update an existing Pembimbing
       operationId: updatePembimbing
       parameters:
-        - name: pembimbingId
+        - name: id
           in: query
           required: true
           schema:
@@ -385,7 +385,7 @@ paths:
       description: Get a Mentor by its ID
       operationId: getMentorById
       parameters:
-        - name: mentorId
+        - name: id
           in: query
           schema:
             type: string
@@ -410,7 +410,7 @@ paths:
       description: Update an existing Mentor
       operationId: updateMentor
       parameters:
-        - name: mentorId
+        - name: id
           in: query
           required: true
           schema:
@@ -458,7 +458,7 @@ paths:
       description: Get a Magang by its ID
       operationId: getMagangById
       parameters:
-        - name: magangId
+        - name: id
           in: query
           schema:
             type: string
@@ -483,7 +483,7 @@ paths:
       description: Update an existing Magang
       operationId: updateMagang
       parameters:
-        - name: magangId
+        - name: id
           in: query
           required: true
           schema:
@@ -531,7 +531,7 @@ paths:
       description: Get a Mahasiswa Magang by its ID
       operationId: getMahasiswaMagangById
       parameters:
-        - name: mahasiswaMagangId
+        - name: id
           in: query
           schema:
             type: string
@@ -556,7 +556,7 @@ paths:
       description: Update an existing Mahasiswa Magang
       operationId: updateMahasiswaMagang
       parameters:
-        - name: mahasiswaMagangId
+        - name: id
           in: query
           required: true
           schema:
@@ -583,7 +583,7 @@ paths:
       description: Delete a Mahasiswa Magang by its ID
       operationId: deleteMahasiswaMagang
       parameters:
-        - name: mahasiswaMagangId
+        - name: id
           in: query
           required: true
           schema:
@@ -606,7 +606,7 @@ paths:
       description: Update an existing Seleksi
       operationId: updateSeleksi
       parameters:
-        - name: seleksiId
+        - name: id
           in: query
           required: true
           schema:
@@ -654,7 +654,7 @@ paths:
       description: Get a Report by its ID
       operationId: getReportById
       parameters:
-        - name: reportId
+        - name: id
           in: query
           schema:
             type: string
@@ -679,7 +679,7 @@ paths:
       description: Update an existing Report
       operationId: updateReport
       parameters:
-        - name: reportId
+        - name: id
           in: query
           required: true
           schema:
@@ -706,7 +706,7 @@ paths:
       description: Delete a Report by its ID
       operationId: deleteReport
       parameters:
-        - name: reportId
+        - name: id
           in: query
           required: true
           schema:
