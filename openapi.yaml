@@ -112,28 +112,6 @@ paths:
     get:
       tags:
         - User
-      summary: Get All User
-      description: List Data User
-      operationId: getAllUser
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
-        "400":
-          description: Invalid status value
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-user:
-    get:
-      tags:
-        - User
       summary: Get User By ID
       description: List Data User
       operationId: getUserByID
@@ -190,28 +168,6 @@ paths:
           description: Mitra signed up successfully
         "400":
           description: Invalid input or Mitra already exists
-  /intermoni-mahasiswa:
-    get:
-      tags:
-        - Mahasiswa
-      summary: Get All Mahasiswa oleh Admin
-      description: List Data Mahasiswa
-      operationId: getAllMahasiswa
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Mahasiswa"
-        "404":
-          description: Mahasiswa not found
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
   /intermoni-mahasiswa:
     get:
       tags:
@@ -280,7 +236,6 @@ paths:
       parameters:
         - name: mitraId
           in: path
-          required: true
           schema:
             type: string
           description: ID of the Mitra
@@ -353,31 +308,12 @@ paths:
     get:
       tags:
         - Pembimbing
-      summary: Get All Pembimbing
-      description: List Data Pembimbing
-      operationId: getAllPembimbing
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PembimbingArray"
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-pembimbing:
-    get:
-      tags:
-        - Pembimbing
       summary: Get Pembimbing by ID
       description: Get a Pembimbing by its ID
       operationId: getPembimbingById
       parameters:
         - name: pembimbingId
           in: path
-          required: true
           schema:
             type: string
           description: ID of the Pembimbing
@@ -445,31 +381,12 @@ paths:
     get:
       tags:
         - Mentor
-      summary: Get All Mentors
-      description: List Data Mentors
-      operationId: getAllMentors
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MentorArray"
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-mentor:
-    get:
-      tags:
-        - Mentor
       summary: Get Mentor by ID
       description: Get a Mentor by its ID
       operationId: getMentorById
       parameters:
         - name: mentorId
           in: path
-          required: true
           schema:
             type: string
           description: ID of the Mentor
@@ -537,31 +454,12 @@ paths:
     get:
       tags:
         - Magang
-      summary: Get All Magang
-      description: List Data Magang
-      operationId: getAllMagang
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MagangArray"
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-magang:
-    get:
-      tags:
-        - Magang
       summary: Get Magang by ID
       description: Get a Magang by its ID
       operationId: getMagangById
       parameters:
         - name: magangId
           in: path
-          required: true
           schema:
             type: string
           description: ID of the Magang
@@ -629,31 +527,12 @@ paths:
     get:
       tags:
         - Mahasiswa Magang
-      summary: Get All Mahasiswa Magang
-      description: List Data Mahasiswa Magang
-      operationId: getAllMahasiswaMagang
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MahasiswaMagangArray"
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-mahasiswa-magang:
-    get:
-      tags:
-        - Mahasiswa Magang
       summary: Get Mahasiswa Magang by ID
       description: Get a Mahasiswa Magang by its ID
       operationId: getMahasiswaMagangById
       parameters:
         - name: mahasiswaMagangId
           in: path
-          required: true
           schema:
             type: string
           description: ID of the Mahasiswa Magang
@@ -771,31 +650,12 @@ paths:
     get:
       tags:
         - Report
-      summary: Get All Reports
-      description: List Data Reports
-      operationId: getAllReports
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReportArray"
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /intermoni-report:
-    get:
-      tags:
-        - Report
       summary: Get Report by ID
       description: Get a Report by its ID
       operationId: getReportById
       parameters:
         - name: reportId
           in: path
-          required: true
           schema:
             type: string
           description: ID of the Report
