@@ -218,11 +218,22 @@ paths:
       requestBody:
         content:
           application/json:
+            schema:
+              $ref: "#/components/schemas/Mahasiswa"
             examples:
               mahasiswa:
-                $ref: "#/components/examples/UpdateProfilMahasiswa"
+                summary: Update Profil oleh Mahasiswa
+                value:
+                  namalengkap: "John Doe"
+                  tanggallahir: "2002-08-12"
+                  jeniskelamin: "Laki-laki"
+                  nim: "123456789"
+                  perguruantinggi: "Universitas ABC"
+                  prodi: "Teknik Informatika"
               admin:
-                $ref: "#/components/examples/SeleksiMahasiswa"
+                summary: Seleksi Mahasiswa oleh Admin
+                value:
+                  seleksikampus: 1
       responses:
         "200":
           description: Mahasiswa updated successfully
@@ -282,9 +293,20 @@ paths:
               $ref: "#/components/schemas/Mitra"
             examples:
               mitra:
-                $ref: "#/components/examples/UpdateProfilMitra"
+                summary: Update Profil oleh Mitra
+                value:
+                  namanarahubung: "John Doe"
+                  nohpnarahubung: "08123456789"
+                  nama: "Mitra ABC"
+                  kategori: "Perusahaan"
+                  sektorindustri: "Teknologi"
+                  tentang: "Deskripsi mengenai Mitra ABC"
+                  alamat: "Jalan Mitra ABC No. 123"
+                  website: "https://www.mitraabc.com"
               admin:
-                $ref: "#/components/examples/SeleksiMitra"
+                summary: Confirm Mou oleh Admin
+                value:
+                  mou: 1
       responses:
         "200":
           description: Mitra updated successfully
@@ -1137,32 +1159,3 @@ components:
       type: apiKey
       name: Authorization
       in: header
-  examples:
-    UpdateProfilMahasiswa:
-      summary: Update Profil oleh Mahasiswa
-      value:
-        namalengkap: "John Doe"
-        tanggallahir: "2002-08-12"
-        jeniskelamin: "Laki-laki"
-        nim: "123456789"
-        perguruantinggi: "Universitas ABC"
-        prodi: "Teknik Informatika"
-    SeleksiMahasiswa:
-      summary: Seleksi Mahasiswa oleh Admin
-      value:
-        seleksikampus: 1
-    UpdateProfilMitra:
-      summary: Update Profil oleh Mitra
-      value:
-        namanarahubung: "John Doe"
-        nohpnarahubung: "08123456789"
-        nama: "Mitra ABC"
-        kategori: "Perusahaan"
-        sektorindustri: "Teknologi"
-        tentang: "Deskripsi mengenai Mitra ABC"
-        alamat: "Jalan Mitra ABC No. 123"
-        website: "https://www.mitraabc.com"
-    SeleksiMitra:
-      summary: Confirm Mou oleh Admin
-      value:
-        mou: 1
