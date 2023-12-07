@@ -230,11 +230,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Response"
-              examples:
-                mahasiswa:
-                  $ref: "#/components/examples/UpdateProfilMahasiswa"
-                admin:
-                  $ref: "#/components/examples/SeleksiMahasiswa"
         "404":
           description: Mahasiswa not found
       security:
