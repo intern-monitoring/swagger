@@ -123,6 +123,10 @@ paths:
       responses:
         "201":
           description: Mahasiswa signed up successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "400":
           description: Invalid input or Mahasiswa already exists
   /intermoni-signup-mitra:
@@ -140,6 +144,10 @@ paths:
       responses:
         "201":
           description: Mitra signed up successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "400":
           description: Invalid input or Mitra already exists
   /intermoni-user:
@@ -161,7 +169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserData"
+                $ref: "#/components/schemas/User"
         "400":
           description: Invalid status value
       security:
@@ -210,8 +218,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: "#/components/schemas/Mahasiswa"
             examples:
               mahasiswa:
                 $ref: "#/components/examples/UpdateProfilMahasiswa"
@@ -220,6 +226,15 @@ paths:
       responses:
         "200":
           description: Mahasiswa updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+              examples:
+                mahasiswa:
+                  $ref: "#/components/examples/UpdateProfilMahasiswa"
+                admin:
+                  $ref: "#/components/examples/SeleksiMahasiswa"
         "404":
           description: Mahasiswa not found
       security:
@@ -278,6 +293,10 @@ paths:
       responses:
         "200":
           description: Mitra updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "404":
           description: Mitra not found
       security:
@@ -299,6 +318,10 @@ paths:
       responses:
         "201":
           description: Pembimbing created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "400":
           description: Invalid input
       security:
@@ -351,6 +374,10 @@ paths:
       responses:
         "200":
           description: Pembimbing updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "404":
           description: Pembimbing not found
       security:
@@ -372,6 +399,10 @@ paths:
       responses:
         "201":
           description: Mentor created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "400":
           description: Invalid input
       security:
@@ -424,6 +455,10 @@ paths:
       responses:
         "200":
           description: Mentor updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "404":
           description: Mentor not found
       security:
@@ -445,6 +480,10 @@ paths:
       responses:
         "201":
           description: Magang created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "400":
           description: Invalid input
       security:
@@ -497,6 +536,10 @@ paths:
       responses:
         "200":
           description: Magang updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "404":
           description: Magang not found
       security:
@@ -516,8 +559,12 @@ paths:
             schema:
               $ref: "#/components/schemas/MahasiswaMagang"
       responses:
-        "201":
+        "200":
           description: Mahasiswa Magang created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "400":
           description: Invalid input
       security:
@@ -570,7 +617,11 @@ paths:
       responses:
         "200":
           description: Mahasiswa Magang updated successfully
-        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+        "405":
           description: Mahasiswa Magang not found
       security:
         - token:
@@ -590,9 +641,13 @@ paths:
             type: string
           description: ID of the Mahasiswa Magang
       responses:
-        "204":
+        "200":
           description: Mahasiswa Magang deleted successfully
-        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+        "405":
           description: Mahasiswa Magang not found
       security:
         - token:
@@ -620,7 +675,11 @@ paths:
       responses:
         "200":
           description: Seleksi updated successfully
-        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+        "405":
           description: Seleksi not found
       security:
         - token:
@@ -639,8 +698,12 @@ paths:
             schema:
               $ref: "#/components/schemas/Report"
       responses:
-        "201":
+        "200":
           description: Report created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "400":
           description: Invalid input
       security:
@@ -666,7 +729,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Report"
-        "404":
+        "405":
           description: Report not found
       security:
         - token:
@@ -693,6 +756,10 @@ paths:
       responses:
         "200":
           description: Report updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "404":
           description: Report not found
       security:
@@ -713,9 +780,13 @@ paths:
             type: string
           description: ID of the Report
       responses:
-        "204":
+        "200":
           description: Report deleted successfully
-        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+        "405":
           description: Report not found
       security:
         - token:
@@ -736,6 +807,10 @@ paths:
       responses:
         "200":
           description: Email changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "400":
           description: Invalid input or Email change failed
       security:
@@ -757,6 +832,10 @@ paths:
       responses:
         "200":
           description: Password changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
         "400":
           description: Invalid input or Password change failed
       security:
@@ -789,23 +868,18 @@ components:
         role:
           type: string
           example: admin
+    Response:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: message
     User:
       type: object
       properties:
-        _id:
-          type: string
-          example: asdasdasdasd
-        email:
-          type: string
-          example: admin@gmail.com
-        role:
-          type: string
-          example: admin
-    UserData:
-      type: object
-      properties:
-        data:
-          type: object
         akun:
           type: object
           properties:
@@ -818,7 +892,6 @@ components:
             role:
               type: string
               example: admin
-
     SignupMahasiswaRequest:
       type: object
       properties:
@@ -1073,12 +1146,12 @@ components:
     UpdateProfilMahasiswa:
       summary: Update Profil oleh Mahasiswa
       value:
-        namalengkap: John Doe
-        tanggallahir: 2002-08-12
-        jeniskelamin: Laki-laki
-        nim: 123456789
-        perguruantinggi: Universitas ABC
-        prodi: Teknik Informatika
+        namalengkap: "John Doe"
+        tanggallahir: "2002-08-12"
+        jeniskelamin: "Laki-laki"
+        nim: "123456789"
+        perguruantinggi: "Universitas ABC"
+        prodi: "Teknik Informatika"
     SeleksiMahasiswa:
       summary: Seleksi Mahasiswa oleh Admin
       value:
@@ -1086,14 +1159,14 @@ components:
     UpdateProfilMitra:
       summary: Update Profil oleh Mitra
       value:
-        namanarahubung: John Doe
-        nohpnarahubung: 08123456789
-        nama: Mitra ABC
-        kategori: Perusahaan
-        sektorindustri: Teknologi
-        tentang: Deskripsi mengenai Mitra ABC
-        alamat: Jalan Mitra ABC No. 123
-        website: https://www.mitraabc.com
+        namanarahubung: "John Doe"
+        nohpnarahubung: "08123456789"
+        nama: "Mitra ABC"
+        kategori: "Perusahaan"
+        sektorindustri: "Teknologi"
+        tentang: "Deskripsi mengenai Mitra ABC"
+        alamat: "Jalan Mitra ABC No. 123"
+        website: "https://www.mitraabc.com"
     SeleksiMitra:
       summary: Confirm Mou oleh Admin
       value:
