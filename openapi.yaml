@@ -170,6 +170,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
+              examples:
+                allUsers:
+                  summary: Get all users
+                  value:
+                    - _id: "1"
+                      email: john@gmail.com
+                      role: mahasiswa
+                    - _id: "2"
+                      email: jane@gmail.com
+                      role: mitra
+                oneUser:
+                  summary: Get User By ID
+                  value:
+                    akun:
+                      {
+                        "_id": "1",
+                        "email": "john@gmail.com",
+                        "role": "mahasiswa",
+                      }
         "400":
           description: Invalid status value
       security:
@@ -195,7 +214,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Mahasiswa"
+                oneOf:
+                  - $ref: "#/components/schemas/Cat"
+                  - $ref: "#/components/schemas/Dog"
+
         "404":
           description: Mahasiswa not found
       security:
@@ -861,6 +883,38 @@ paths:
             - read:apiKey
 components:
   schemas:
+    Pet:
+      type: object
+      required:
+        - pet_type
+      properties:
+        pet_type:
+          type: string
+      discriminator:
+        propertyName: pet_type
+
+    Dog: # "Dog" is a value for the pet_type property (the discriminator value)
+      allOf: # Combines the main `Pet` schema with `Dog`-specific properties
+        - $ref: "#/components/schemas/Pet"
+        - type: object
+          # all other properties specific to a `Dog`
+          properties:
+            bark:
+              type: boolean
+            breed:
+              type: string
+              enum: [Dingo, Husky, Retriever, Shepherd]
+
+    Cat: # "Cat" is a value for the pet_type property (the discriminator value)
+      allOf: # Combines the main `Pet` schema with `Cat`-specific properties
+        - $ref: "#/components/schemas/Pet"
+        - type: object
+          # all other properties specific to a `Cat`
+          properties:
+            hunts:
+              type: boolean
+            age:
+              type: integer
     Login:
       type: object
       properties:
@@ -897,18 +951,15 @@ components:
     User:
       type: object
       properties:
-        akun:
-          type: object
-          properties:
-            _id:
-              type: string
-              example: asdasdasdasd
-            email:
-              type: string
-              example: admin@gmail.com
-            role:
-              type: string
-              example: admin
+        _id:
+          type: string
+          example: asdasdasdasd
+        email:
+          type: string
+          example: admin@gmail.com
+        role:
+          type: string
+          example: admin
     SignupMahasiswaRequest:
       type: object
       properties:
