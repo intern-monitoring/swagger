@@ -215,8 +215,8 @@ paths:
             application/json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Cat"
-                  - $ref: "#/components/schemas/Dog"
+                  - $ref: "#/components/schemas/AdminResponse"
+                  - $ref: "#/components/schemas/MahasiswaResponse"
 
         "404":
           description: Mahasiswa not found
@@ -883,19 +883,19 @@ paths:
             - read:apiKey
 components:
   schemas:
-    Pet:
+    ResponseGetMahasiswa:
       type: object
       required:
-        - pet_type
+        - response_type
       properties:
-        pet_type:
-          type: string
+        response_type:
+          type: json
       discriminator:
-        propertyName: pet_type
+        propertyName: response_type
 
-    Dog: # "Dog" is a value for the pet_type property (the discriminator value)
+    AdminResponse: # "Dog" is a value for the pet_type property (the discriminator value)
       allOf: # Combines the main `Pet` schema with `Dog`-specific properties
-        - $ref: "#/components/schemas/Pet"
+        - $ref: "#/components/schemas/ResponseGetMahasiswa"
         - type: object
           # all other properties specific to a `Dog`
           properties:
@@ -905,9 +905,9 @@ components:
               type: string
               enum: [Dingo, Husky, Retriever, Shepherd]
 
-    Cat: # "Cat" is a value for the pet_type property (the discriminator value)
+    MahasiswaResponse: # "Cat" is a value for the pet_type property (the discriminator value)
       allOf: # Combines the main `Pet` schema with `Cat`-specific properties
-        - $ref: "#/components/schemas/Pet"
+        - $ref: "#/components/schemas/ResponseGetMahasiswa"
         - type: object
           # all other properties specific to a `Cat`
           properties:
