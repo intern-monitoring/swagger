@@ -20,72 +20,77 @@ tags:
     description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/login/
+      url: https://intermoni.my.id/gcf/login/function.go
   - name: SignUp Mahasiswa
     description: Registrasi Mahasiswa
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/signup_mahasiswa/
+      url: https://intermoni.my.id/gcf/signup_mahasiswa/function.go
   - name: SignUp Mitra
     description: Registrasi Mitra
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/signup_mitra/
+      url: https://intermoni.my.id/gcf/signup_mitra/function.go
   - name: User
     description: Get Data User oleh Admin
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/user/
+      url: https://intermoni.my.id/gcf/user/function.go
   - name: Mahasiswa
     description: Data Mahasiswa
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/mahasiswa/
+      url: https://intermoni.my.id/gcf/mahasiswa/function.go
   - name: Mitra
     description: Data Mitra
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/mitra/
+      url: https://intermoni.my.id/gcf/mitra/function.go
   - name: Pembimbing
     description: Data Pembimbing
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/pembimbing/
+      url: https://intermoni.my.id/gcf/pembimbing/function.go
   - name: Mentor
     description: Data Mentor
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/mentor/
+      url: https://intermoni.my.id/gcf/mentor/function.go
   - name: Magang
     description: Data Magang
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/magang/
+      url: https://intermoni.my.id/gcf/magang/function.go
   - name: Mahasiswa Magang
     description: Data Mahasiswa Magang
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/mahasiswamagang/
+      url: https://intermoni.my.id/gcf/mahasiswamagang/function.go
   - name: Seleksi
     description: Seleksi berkas & wawancara
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/seleksi/
+      url: https://intermoni.my.id/gcf/seleksi/function.go
+  - name: Task
+    description: Task magang
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://intermoni.my.id/gcf/task/function.go
   - name: Report
     description: Report magang
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/report/
+      url: https://intermoni.my.id/gcf/report/function.go
   - name: Email
     description: Ganti Email
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/email/
+      url: https://intermoni.my.id/gcf/email/function.go
   - name: Password
     description: Ganti Password
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://intermoni.my.id/gcf/password/
+      url: https://intermoni.my.id/gcf/password/function.go
 paths:
   /intermoni-login:
     post:
@@ -154,15 +159,15 @@ paths:
     get:
       tags:
         - User
-      summary: Get User By ID
-      description: List Data User
+      summary: Get User
+      description: Data User
       operationId: getUserByID
       parameters:
         - name: id
           in: query
           schema:
             type: string
-          description: ID of the User
+          description: ID of User
       responses:
         "200":
           description: successful operation
@@ -199,15 +204,15 @@ paths:
     get:
       tags:
         - Mahasiswa
-      summary: Get Mahasiswa by ID oleh Admin
-      description: Get a Mahasiswa by its ID
+      summary: Get Mahasiswa
+      description: Data Mahasiswa
       operationId: getMahasiswaById
       parameters:
         - name: id
           in: query
           schema:
             type: string
-          description: ID of the Mahasiswa
+          description: ID of Mahasiswa
       responses:
         "200":
           description: successful operation
@@ -215,8 +220,8 @@ paths:
             application/json:
               schema:
                 oneOf:
+                  - $ref: "#/components/schemas/Mahasiswa"
                   - $ref: "#/components/schemas/AdminResponse"
-                  - $ref: "#/components/schemas/MahasiswaResponse"
 
         "404":
           description: Mahasiswa not found
@@ -236,7 +241,7 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the Mahasiswa
+          description: ID of Mahasiswa
       requestBody:
         content:
           application/json:
@@ -252,6 +257,7 @@ paths:
                   nim: "123456789"
                   perguruantinggi: "Universitas ABC"
                   prodi: "Teknik Informatika"
+                  file: "link_gambar.jpg"
               admin:
                 summary: Seleksi Mahasiswa oleh Admin
                 value:
@@ -273,15 +279,15 @@ paths:
     get:
       tags:
         - Mitra
-      summary: Get Mitra by ID
-      description: Get a Mitra by its ID
+      summary: Get Mitra
+      description: Data Mitra
       operationId: getMitraById
       parameters:
         - name: id
           in: query
           schema:
             type: string
-          description: ID of the Mitra
+          description: ID of Mitra
       responses:
         "200":
           description: successful operation
@@ -307,7 +313,7 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the Mitra
+          description: ID of Mitra
       requestBody:
         content:
           application/json:
@@ -325,6 +331,7 @@ paths:
                   tentang: "Deskripsi mengenai Mitra ABC"
                   alamat: "Jalan Mitra ABC No. 123"
                   website: "https://www.mitraabc.com"
+                  file: "link_gambar.jpg"
               admin:
                 summary: Confirm Mou oleh Admin
                 value:
@@ -370,15 +377,15 @@ paths:
     get:
       tags:
         - Pembimbing
-      summary: Get Pembimbing by ID
-      description: Get a Pembimbing by its ID
+      summary: Get Pembimbing
+      description: Data Pembimbing
       operationId: getPembimbingById
       parameters:
         - name: id
           in: query
           schema:
             type: string
-          description: ID of the Pembimbing
+          description: ID of Pembimbing
       responses:
         "200":
           description: successful operation
@@ -404,7 +411,7 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the Pembimbing
+          description: ID of Pembimbing
       requestBody:
         content:
           application/json:
@@ -434,7 +441,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Mentor"
+              $ref: "#/components/schemas/MentorRequest"
       responses:
         "201":
           description: Mentor created successfully
@@ -451,15 +458,15 @@ paths:
     get:
       tags:
         - Mentor
-      summary: Get Mentor by ID
-      description: Get a Mentor by its ID
+      summary: Get Mentor
+      description: Data Mentor
       operationId: getMentorById
       parameters:
         - name: id
           in: query
           schema:
             type: string
-          description: ID of the Mentor
+          description: ID of Mentor
       responses:
         "200":
           description: successful operation
@@ -485,12 +492,12 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the Mentor
+          description: ID of Mentor
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Mentor"
+              $ref: "#/components/schemas/MentorRequest"
       responses:
         "200":
           description: Mentor updated successfully
@@ -515,7 +522,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Magang"
+              $ref: "#/components/schemas/MagangRequest"
       responses:
         "201":
           description: Magang created successfully
@@ -532,15 +539,14 @@ paths:
     get:
       tags:
         - Magang
-      summary: Get Magang by ID
-      description: Get a Magang by its ID
+      summary: Get Magang
       operationId: getMagangById
       parameters:
         - name: id
           in: query
           schema:
             type: string
-          description: ID of the Magang
+          description: ID of Magang
       responses:
         "200":
           description: successful operation
@@ -566,12 +572,12 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the Magang
+          description: ID of Magang
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Magang"
+              $ref: "#/components/schemas/MagangRequest"
       responses:
         "200":
           description: Magang updated successfully
@@ -589,14 +595,20 @@ paths:
     post:
       tags:
         - Mahasiswa Magang
-      summary: Create Mahasiswa Magang
+      summary: Apply Magang oleh Mahasiswa
       description: Create a new Mahasiswa Magang
       operationId: createMahasiswaMagang
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MahasiswaMagang"
+      # requestBody:
+      #   content:
+      #     application/json:
+      #       schema:
+      #         $ref: "#/components/schemas/MahasiswaMagangRequest"
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+          description: ID of Magang
       responses:
         "200":
           description: Mahasiswa Magang created successfully
@@ -613,15 +625,15 @@ paths:
     get:
       tags:
         - Mahasiswa Magang
-      summary: Get Mahasiswa Magang by ID
-      description: Get a Mahasiswa Magang by its ID
+      summary: Get Mahasiswa Magang
+      description: Data Mahasiswa Magang
       operationId: getMahasiswaMagangById
       parameters:
         - name: id
           in: query
           schema:
             type: string
-          description: ID of the Mahasiswa Magang
+          description: ID of Mahasiswa Magang
       responses:
         "200":
           description: successful operation
@@ -647,12 +659,26 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the Mahasiswa Magang
+          description: ID of Mahasiswa Magang
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/MahasiswaMagang"
+            examples:
+              admin:
+                summary: Tambah Pembimbing oleh Admin
+                value:
+                  pembimbing: { "_id": "123456789" }
+              mitra:
+                summary: Tambah Mentor oleh Mitra
+                value:
+                  mentor: { "_id": "123456789" }
+              mahasiswa:
+                summary: Konfirmasi Magang oleh Mahasiswa
+                value:
+                  status: 1
+
       responses:
         "200":
           description: Mahasiswa Magang updated successfully
@@ -669,8 +695,8 @@ paths:
     delete:
       tags:
         - Mahasiswa Magang
-      summary: Delete Mahasiswa Magang
-      description: Delete a Mahasiswa Magang by its ID
+      summary: Batal Apply Magang oleh Mahasiswa
+      description: Delete Mahasiswa Magang by its ID
       operationId: deleteMahasiswaMagang
       parameters:
         - name: id
@@ -678,7 +704,7 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the Mahasiswa Magang
+          description: ID of Mahasiswa Magang
       responses:
         "200":
           description: Mahasiswa Magang deleted successfully
@@ -696,8 +722,8 @@ paths:
     put:
       tags:
         - Seleksi
-      summary: Update Seleksi
-      description: Update an existing Seleksi
+      summary: Seleksi Berkas & Wawancara
+      description: Seleksi Mahasiswa oleh Mitra
       operationId: updateSeleksi
       parameters:
         - name: id
@@ -705,12 +731,21 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the Seleksi
+          description: ID of Mahasiswa Magang
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Seleksi"
+              $ref: "#/components/schemas/MahasiswaMagang"
+            examples:
+              seleksiberkas:
+                summary: Seleksi berkas
+                value:
+                  seleksiberkas: 1
+              seleksiwawancara:
+                summary: Seleksi wawancara
+                value:
+                  seleksiwawancara: 1
       responses:
         "200":
           description: Seleksi updated successfully
@@ -724,6 +759,81 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
+  /intermoni-task:
+    post:
+      tags:
+        - Task
+      summary: "Tambah task oleh mentor"
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ID of Mahasiswa Magang
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskRequest"
+      responses:
+        "201":
+          description: "Task created successfully"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    get:
+      tags:
+        - Task
+      summary: "Get tasks"
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ID of Mahasiswa Magang
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Task"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Task
+      summary: "Update task oleh mentor"
+      parameters:
+        - name: "id"
+          in: query
+          required: true
+          description: ID of Mahasiswa Magang
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskRequest"
+      responses:
+        "200":
+          description: "Task updated successfully"
+        "404":
+          description: "Task not found"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
   /intermoni-report:
     post:
       tags:
@@ -733,9 +843,9 @@ paths:
       operationId: createReport
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: "#/components/schemas/Report"
+              $ref: "#/components/schemas/ReportRequest"
       responses:
         "200":
           description: Report created successfully
@@ -760,7 +870,7 @@ paths:
           in: query
           schema:
             type: string
-          description: ID of the Report
+          description: ID of Report
       responses:
         "200":
           description: successful operation
@@ -786,12 +896,12 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the Report
+          description: ID of Report
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: "#/components/schemas/Report"
+              $ref: "#/components/schemas/ReportRequest"
       responses:
         "200":
           description: Report updated successfully
@@ -817,7 +927,7 @@ paths:
           required: true
           schema:
             type: string
-          description: ID of the Report
+          description: ID of Report
       responses:
         "200":
           description: Report deleted successfully
@@ -955,6 +1065,9 @@ components:
             email:
               type: string
               example: mahasiswa@example.com
+            phone:
+              type: string
+              example: 628765432109
             password:
               type: string
               example: yourpassword
@@ -1006,6 +1119,9 @@ components:
             email:
               type: string
               example: mitra@example.com
+            phone:
+              type: string
+              example: 628765432109
             password:
               type: string
               example: yourpassword
@@ -1014,6 +1130,7 @@ components:
               example: yourpassword
           required:
             - email
+            - phone
             - password
             - confirmpass
       required:
@@ -1032,81 +1149,231 @@ components:
         id:
           type: string
           example: 1
-        name:
+        namalengkap:
           type: string
           example: John Doe
-        studentId:
+        tanggalahir:
           type: string
-          example: 123456
-        email:
+          example: "1990-01-01"
+        jeniskelamin:
           type: string
-          example: john@example.com
+          example: laki-laki
+        nim:
+          type: string
+          example: 1211212
+        perguruantinggi:
+          type: string
+          example: Universitas Logistik dan Bisnis Internasional
+        prodi:
+          type: string
+          example: Teknik Informatika
+        imageurl:
+          type: string
+          example: link_gambar.jpg
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: jonhdoe@gmail.com
+            role:
+              type: string
+              example: mahasiswa
     Mitra:
       type: object
       properties:
         id:
           type: string
+          example: "605b9399a305031c549a9a65"
+        namanarahubung:
+          type: string
+          example: "John Doe"
+        nohpnarahubung:
+          type: string
+          example: "08123456789"
+        nama:
+          type: string
+          example: "Mitra ABC"
+        kategori:
+          type: string
+          example: "Teknologi"
+        sektorindustri:
+          type: string
+          example: "IT"
+        tentang:
+          type: string
+          example: "Perusahaan IT terkemuka"
+        alamat:
+          type: string
+          example: "Jl. Contoh No. 123"
+        website:
+          type: string
+          example: "http://www.mitra-abc.com"
+        mou:
+          type: integer
           example: 1
-        name:
+        imageurl:
           type: string
-          example: Mitra Name
-        address:
-          type: string
-          example: Mitra Address
-        contact:
-          type: string
-          example: contact@example.com
+          example: "http://www.mitra-abc.com/image.jpg"
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: jonhdoe@gmail.com
+            role:
+              type: string
+              example: mitra
     Pembimbing:
       type: object
       properties:
-        id:
+        nama:
           type: string
-          example: 1
-        name:
+          example: "John Doe"
+        nik:
           type: string
-          example: Pembimbing Name
-        email:
+          example: "123456789"
+        prodi:
           type: string
-          example: pembimbing@example.com
+          example: "Teknik Informatika"
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: mitra@example.com
+            phone:
+              type: string
+              example: 628765432109
+            password:
+              type: string
+              example: yourpassword
+            confirmpass:
+              type: string
+              example: yourpassword
     Mentor:
       type: object
       properties:
-        id:
+        nama:
           type: string
-          example: 1
-        name:
+          example: "John Doe"
+        nik:
           type: string
-          example: Mentor Name
-        email:
+          example: "123456789"
+        mitra:
+          $ref: "#/components/schemas/Mitra"
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: mitra@example.com
+            phone:
+              type: string
+              example: 628765432109
+            password:
+              type: string
+              example: yourpassword
+            confirmpass:
+              type: string
+              example: yourpassword
+    MentorRequest:
+      type: object
+      properties:
+        nama:
           type: string
-          example: mentor@example.com
+          example: "John Doe"
+        nik:
+          type: string
+          example: "123456789"
+        akun:
+          type: object
+          properties:
+            email:
+              type: string
+              example: mitra@example.com
+            phone:
+              type: string
+              example: 628765432109
+            password:
+              type: string
+              example: yourpassword
+            confirmpass:
+              type: string
+              example: yourpassword
     Magang:
       type: object
       properties:
         id:
           type: string
-          example: 1
-        name:
+          example: "123"
+        posisi:
           type: string
-          example: Magang Name
-        duration:
+          example: "IT Intern"
+        mitra:
+          $ref: "#/components/schemas/Mitra"
+        lokasi:
           type: string
-          example: 3 months
-        location:
+          example: "Jakarta"
+        createdat:
           type: string
-          example: Magang Location
+          example: "2024-01-23T12:34:56Z"
+        deskripsimagang:
+          type: string
+          example: "Magang di departemen pengembangan perangkat lunak"
+        infotambahanmagang:
+          type: string
+          example: "Magang ini memerlukan pengetahuan dasar tentang pemrograman"
+        expired:
+          type: string
+          example: "2024-12-31"
+    MagangRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "123"
+        posisi:
+          type: string
+          example: "IT Intern"
+        lokasi:
+          type: string
+          example: "Jakarta"
+        createdat:
+          type: string
+          example: "2024-01-23T12:34:56Z"
+        deskripsimagang:
+          type: string
+          example: "Magang di departemen pengembangan perangkat lunak"
+        infotambahanmagang:
+          type: string
+          example: "Magang ini memerlukan pengetahuan dasar tentang pemrograman"
+        expired:
+          type: string
+          example: "2024-12-31"
     MahasiswaMagang:
       type: object
       properties:
         id:
           type: string
           example: 1
-        mahasiswaId:
-          type: string
-          example: 123456
-        magangId:
-          type: string
-          example: 789012
+        mahasiswa:
+          $ref: "#/components/schemas/Mahasiswa"
+        magang:
+          $ref: "#/components/schemas/Magang"
+        pembimbing:
+          $ref: "#/components/schemas/Pembimbing"
+        mentor:
+          $ref: "#/components/schemas/Mentor"
+        seleksiberkas:
+          type: integer
+          example: 1
+        seleksiwawancara:
+          type: integer
+          example: 1
+        status:
+          type: integer
+          example: 1
     Seleksi:
       type: object
       properties:
@@ -1122,39 +1389,94 @@ components:
         result:
           type: string
           example: "Passed"
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "605b9399a305031c549a9a65"
+        mahasiswaMagang:
+          $ref: "#/components/schemas/MahasiswaMagang"
+        tasks:
+          type: array
+          example: ["Task 1", "Task 2"]
+    TaskRequest:
+      type: object
+      properties:
+        tasks:
+          type: array
+          example: ["Task 1", "Task 2"]
     Report:
       type: object
       properties:
         id:
           type: string
-          example: 1
-        magangId:
+          example: "605b9399a305031c549a9a65"
+        mahasiswaMagang:
+          $ref: "#/components/schemas/MahasiswaMagang"
+        task:
           type: string
-          example: 789012
-        content:
+          example: "Membuat tampilan login"
+        deskripsi:
           type: string
-          example: "This is the report content."
+          example: "Completed the coding task successfully"
+        hasil:
+          type: string
+          example: "Excellent"
+        kehadiran:
+          type: string
+          example: "link_gambar.jpg"
+        createdat:
+          type: string
+          format: "date-time"
+          example: "2024-01-23T12:34:56Z"
+        updatedat:
+          type: string
+          format: "date-time"
+          example: "2024-01-24T14:45:30Z"
+        feedback:
+          type: string
+          example: "Great work!"
+        nilaimentor:
+          type: integer
+          example: 100
+        nilaipembimbing:
+          type: integer
+          example: 100
+    ReportRequest:
+      type: object
+      properties:
+        task:
+          type: string
+          example: "Membuat tampilan login"
+        deskripsi:
+          type: string
+          example: "Completed the coding task successfully"
+        hasil:
+          type: string
+          example: "Excellent"
+        file:
+          type: string
+          format: binary
+          example: "link_gambar.jpg"
     ChangeEmailRequest:
       type: object
       properties:
-        newEmail:
+        email:
           type: string
-          example: newemail@example.com
-        password:
-          type: string
-          example: yourpassword
-      required:
-        - newEmail
-        - password
+          example: newemail@example.co
     ChangePasswordRequest:
       type: object
       properties:
-        currentPassword:
+        password:
           type: string
           example: yourcurrentpassword
-        newPassword:
+        newpass:
           type: string
           example: yournewpassword
+        confirmpass:
+          type: string
+          example: confirmyournewpassword
       required:
         - currentPassword
         - newPassword
